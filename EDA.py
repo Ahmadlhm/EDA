@@ -134,25 +134,9 @@ if uploaded_file is not None:
                 st.pyplot(fig)
         else:
             st.write("No numeric features available for categorization.")
-
-    # Display Counts of discrete Variables Grouped by Target
-    if st.checkbox('Show counts of discrete variables grouped by target'):
-        st.subheader('Counts of Discrete Variables Grouped by Target')
-        numerical_features = df.select_dtypes(include=['int64', 'float64']).columns.tolist() 
-        discrete_vars = [var for var in numerical_features if df[var].nunique() < 20]
-        target_col = st.selectbox('Select target column', df.columns)
-        if discrete_vars and target_col:
-            for var in discrete_vars:
-                ct = pd.crosstab(df[var], df[target_col])
-                fig = plt.figure(figsize=(10, 4))
-                ct.plot(kind='bar')
-                plt.xlabel(var)
-                plt.ylabel('Count')
-                plt.title(f'Counts of {var} Variable Grouped by Target')
-                st.pyplot(fig)
-        else:
-            st.write("No discrete variables or target column selected.")                                                              
+                                                            
 else:
     st.info('Awaiting for CSV file to be uploaded.')
+
 
 
